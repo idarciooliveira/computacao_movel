@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gerir Veiculos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-searchbar (ionInput)="filtrarVeiculos($event)"></ion-searchbar>
+    <ion-item *ngFor="let veiculo of veiculos">
+      <ion-label>
+        <h2>{{ veiculo.placa }}</h2>
+        <p>{{ veiculo.marca }}</p>
+        <p>{{ veiculo.modelo }}</p>
+        <p>{{ veiculo.cor }}</p>
+      </ion-label>
+      <ion-icon name="trash" slot="end" (click)="excluirVeiculo(veiculo.id)"></ion-icon>
+      <ion-icon name="create" slot="end" (click)="edit(veiculo)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+
+
+  <!-- Modal -->
+  <ion-button id="open-modal" (click)="setOpen(true)" expand="block">Cadastrar Novo Veiculo</ion-button>
+  <ion-modal trigger="open-modal" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Veiculo</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Fechar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+          <ion-item>
+            <ion-label position="floating">Placa</ion-label>
+            <ion-input type="text" formControlName="placa"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Marca</ion-label>
+            <ion-input type="text" formControlName="marca"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Modelo</ion-label>
+            <ion-input type="text" formControlName="modelo"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Cor</ion-label>
+            <ion-input type="text" formControlName="cor"></ion-input>
+          </ion-item>
+          <ion-button type="submit" [disabled]="!validations_form.valid">Guardar</ion-button>
+        </form>
+
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -1,0 +1,45 @@
+ion-header {
+  ion-toolbar {
+    background-color: #3171e0;
+  }
+  ion-title {
+    color: #fff;
+    font-size: 20px;
+  }
+}
+
+ion-content {
+  .form {
+    ion-item {
+      ion-label {
+        font-size: 16px;
+        color: #3171e0;
+      }
+      ion-input {
+        font-size: 16px;
+      }
+    }
+    .validation-errors {
+      .error-message {
+        color: red;
+        font-size: 14px;
+        padding: 5px 0;
+      }
+    }
+    .submit-btn {
+      background-color: #3171e0;
+      color: #fff;
+      font-size: 16px;
+      margin: 20px 0;
+      width: 100%;
+    }
+    .go-to-login {
+      text-align: center;
+      margin-top: 20px;
+      a {
+        color: #3171e0;
+        font-size: 16px;
+      }
+    }
+  }
+}

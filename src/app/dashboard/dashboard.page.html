@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Dashboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        Bem-vindo
+        {{userEmail}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-button style="height: 50px; width: 100%;" [routerLink]="['/professores']"
+        expand="block">Professores</ion-button>
+      <ion-button style="height: 50px; width: 100%;" [routerLink]="['/veiculos']" expand="block">Veículos</ion-button>
+      <ion-button style="height: 50px; width: 100%;" [routerLink]="['/vagas']" expand="block">Vagas</ion-button>
+      <ion-button style="height: 50px; width: 100%;" [routerLink]="['/usuarios']" expand="block">Gerir
+        Utilizadores</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer (click)="logout()">
+  <ion-toolbar color="primary">
+    <ion-title style="text-align: center;">Terminar Sessão</ion-title>
+  </ion-toolbar>
+</ion-footer>

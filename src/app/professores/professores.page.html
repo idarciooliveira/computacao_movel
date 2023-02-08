@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>professores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-searchbar (ionInput)="filtrarProfessores($event)"></ion-searchbar>
+    <ion-item *ngFor="let professor of professores">
+      <ion-label>
+        <h2>{{ professor.nome }}</h2>
+        <p>{{ professor.email }}</p>
+        <p>{{ professor.telefone }}</p>
+        <p>{{ professor.morada }}</p>
+        <p>{{ professor.nbi }}</p>
+      </ion-label>
+      <ion-icon name="trash" slot="end" (click)="excluirProfessor(professor.id)"></ion-icon>
+      <ion-icon name="create" slot="end" (click)="edit(professor)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+
+
+  <!-- Modal -->
+  <ion-button id="open-modal" (click)="setOpen(true)" expand="block">Novo Professor</ion-button>
+  <ion-modal trigger="open-modal" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Professor</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <!-- Add Professor -->
+        <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+          <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input type="text" formControlName="nome"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nº BI</ion-label>
+            <ion-input type="text" formControlName="nbi"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="text" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Telefone</ion-label>
+            <ion-input type="text" formControlName="telefone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Morada</ion-label>
+            <ion-input type="text" formControlName="morada"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Data De Nascimento</ion-label>
+            <ion-input type="text" formControlName="dataDeNascimento"></ion-input>
+          </ion-item>
+          <ion-button type="submit" expand="block" [disabled]="!validations_form.valid">Salvar</ion-button>
+        </form>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

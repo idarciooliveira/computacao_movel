@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gerir Vagas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-searchbar (ionInput)="filtrarVagas($event)"></ion-searchbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let vaga of vagas">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Vaga {{ vaga.numeroVaga }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <img [src]='vaga.qrCode'>
+              <ion-label>
+                <p>Id: {{ vaga.idProfessor }}</p>
+              </ion-label>
+            </ion-card-content>
+            <ion-item>
+              <ion-icon name="trash" slot="end" (click)="excluirVaga(vaga.id)"></ion-icon>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+
+  <!-- Modal -->
+  <ion-button id="open-modal" (click)="setOpen(true)" expand="block">Cadastrar Nova Vaga</ion-button>
+  <ion-modal trigger="open-modal" [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Vaga</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Fechar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <!-- Form add vaga -->
+        <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+
+          <ion-item>
+            <ion-label position="floating">ID</ion-label>
+            <ion-input formControlName="numeroVaga"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Professor</ion-label>
+            <ion-input formControlName="nbi"></ion-input>
+            <!-- <ion-button slot="end" type="button" (click)="searchByNbi(validations_form.value.nbi)"
+              expand="block">Localizar</ion-button> -->
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Veiculo</ion-label>
+            <ion-input formControlName="placa"></ion-input>
+            <!--    <ion-button slot="end" type="button" (click)="searchByPlaca(validations_form.value.placa)"
+              expand="block">Localizar</ion-button> -->
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Periodo</ion-label>
+            <ion-input formControlName="periodo"></ion-input>
+          </ion-item>
+          <ion-button type="submit" expand="block" [disabled]="!validations_form.valid">Guardar Vaga</ion-button>
+        </form>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

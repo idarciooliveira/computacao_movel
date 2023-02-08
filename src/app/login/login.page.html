@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>ISPI Parking</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="loginUser(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Seu Melhor Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Palavra-Passe</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message"
+          *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Iniciar Sessão</ion-button>
+
+    <label class="error-message">{{errorMessage}}</label>
+  </form>
+</ion-content>
